@@ -1,0 +1,25 @@
+UNF: Labo(Personeelsnummer, Naam, Geboortedatum, Labocode, Labonaam, Projectcode, Projectomschrijving, Projectsupervisor)
+
+1NF: 
+Labo (Labocode, Labonaam, Projectcode, Projectomschrijving, Projectsupervisor)
+Personeel (Personeelsnummer, Naam, Geboortedatum)
+Keys: Labocode
+		Personeelsnummer
+
+2NF:
+Labo (Labocode, Labonaam)
+Personeel (Personeelsnummer, Naam, Geboortedatum, Labocode)
+Project(Projectcode, Projectomschrijving, Projectsupervisor, Personeelsnummer)
+Keys: Labocode
+		Personeelsnummer, Labocode (foreign)
+		Projectcode, Projectsupervisor, Personeelsnummer (foreign)
+		
+3NF:
+Labo (Labocode, Labonaam)
+Personeel (Personeelsnummer, Naam, Labocode)
+Geboortedatum (Personeelsnummer, Geboortedatum)
+Project(Projectcode, Projectomschrijving, Projectsupervisor, Personeelsnummer)
+Keys: Labocode
+		Personeelsnummer, Labocode (foreign)
+		Personeelsnummer
+		Projectcode, Projectsupervisor, Personeelsnummer (foreign)
