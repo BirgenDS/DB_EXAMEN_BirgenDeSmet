@@ -1,0 +1,53 @@
+1.
+SELECT gene_name, concat(seq_region_end-seq_region_start) as length FROM gene ORDER by length desc limit 1;
+
++-----------+--------+
+| gene_name | length |
++-----------+--------+
+| C13orf30  | 9997   |
++-----------+--------+
+
+2.
+SELECT gene_name, count(*) as aantal FROM gene JOIN transcript on gene.gene_id = transcript.gene_id GROUP BY gene_name ORDER BY aantal desc limit 1;
+
++-----------+--------+
+| gene_name | aantal |
++-----------+--------+
+| U6        |   1329 |
++-----------+--------+
+
+3.1
+SELECT chromosome, count(gene_name) as aantal FROM gene WHERE description like "%cancer%" GROUP BY chromosome ORDER BY aantal desc limit 1 offset 1;
+
++------------+--------+
+| chromosome | aantal |
++------------+--------+
+| 9          |      5 |
++------------+--------+
+
+3.2
+SELECT count(exon_id), chromosome FROM gene JOIN transcript ON gene.gene_id = transcript.gene_id JOIN exon_transcript ON transcript.transcript_id = exon_transcript.transcript_id WHERE chromosome = 9;
++----------------+------------+
+| count(exon_id) | chromosome |
++----------------+------------+
+|          45679 | 9          |
++----------------+------------+
+
+4.1
+SELECT count(*) FROM exon;
++----------+
+| count(*) |
++----------+
+|   642590 |
++----------+
+
+4.2
+SELECT count(*) FROM exon_transcript;
++----------+
+| count(*) |
++----------+
+|  1178393 |
++----------+
+
+=> In de tabel exon_transcript worden alle mogelijke combinaties tussen exonen en transcripten weergegeven. Als er dus meerdere combinaties mogelijk zijn met een exon of een transcript zorgt dat ervoor dat er in deze tabel meer rijen aanwezig zijn.
+
